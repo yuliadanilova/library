@@ -1,20 +1,13 @@
-package com.study.library.entities;
+package com.study.library.dto;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-public class AuthorEntity {
-
-    @Id
-    @GeneratedValue
+public class AuthorDto {
     private Integer id;
-    @Column
     private String name;
-    @Column
     private String description;
-    @ManyToMany(mappedBy = "authors")
-    private List<BookEntity> books;
+    private List<BookDto> books;
+
 
     public Integer getId() {
         return id;
@@ -32,14 +25,6 @@ public class AuthorEntity {
         this.name = name;
     }
 
-    public List<BookEntity> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookEntity> books) {
-        this.books = books;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -47,4 +32,13 @@ public class AuthorEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public List<BookDto> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<BookDto> books) {
+        this.books = books;
+    }
+
 }

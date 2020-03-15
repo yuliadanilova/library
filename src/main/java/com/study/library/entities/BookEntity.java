@@ -11,7 +11,7 @@ public class BookEntity {
     @Column
     private String name;
     @Column
-    private String comment;
+    private Integer count;
     @ManyToMany()
     private List<AuthorEntity> authors;
 
@@ -31,19 +31,19 @@ public class BookEntity {
         this.name = name;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
     public List<AuthorEntity> getAuthors() {
         return authors;
     }
 
     public void setAuthors(List<AuthorEntity> authors) {
         this.authors = authors;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

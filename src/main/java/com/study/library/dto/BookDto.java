@@ -1,9 +1,20 @@
 package com.study.library.dto;
 
+import java.util.List;
+
 public class BookDto {
     private Integer id;
     private String name;
-    private String comment;
+    private Integer count;
+    private List<AuthorDto> authors;
+
+    public List<AuthorDto> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<AuthorDto> authors) {
+        this.authors = authors;
+    }
 
     public Integer getId() {
         return id;
@@ -21,11 +32,13 @@ public class BookDto {
         this.name = name;
     }
 
-    public String getComment() {
-        return comment;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setCount(Integer count) {
+        this.count = count;
     }
+
+
 }
