@@ -2,8 +2,10 @@ package com.study.library.converters;
 
 import com.study.library.dto.AuthorDto;
 import com.study.library.dto.BookDto;
+import com.study.library.dto.ClientDto;
 import com.study.library.entities.AuthorEntity;
 import com.study.library.entities.BookEntity;
+import com.study.library.entities.ClientEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -47,5 +49,24 @@ public class Converter {
                     return convertBookDtoToBookEntity(book, b);
                 })
                 .collect(Collectors.toList());
+    }
+
+    public ClientEntity convertClientDtoToClientEntity(ClientDto client) {
+        ClientEntity clientEntity = new ClientEntity();
+        clientEntity.setPassport(client.getPassport());
+        clientEntity.setAge(client.getAge());
+        clientEntity.setFirstname(client.getFirstName());
+        clientEntity.setLastname(client.getLastName());
+        return clientEntity;
+    }
+
+    public ClientDto convertClientEntityToClientDto(ClientEntity clientEntity) {
+        ClientDto clientDto = new ClientDto();
+        clientDto.setId(clientEntity.getId());
+        clientDto.setAge(clientEntity.getAge());
+        clientDto.setPassport(clientEntity.getPassport());
+        clientDto.setFirstName(clientEntity.getFirstname());
+        clientDto.setLastName(clientEntity.getLastname());
+        return clientDto;
     }
 }

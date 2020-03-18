@@ -2,6 +2,7 @@ package com.study.library.controllers;
 import com.study.library.converters.Converter;
 import com.study.library.dto.AuthorDto;
 import com.study.library.entities.AuthorEntity;
+import com.study.library.exceptions.NotFoundException;
 import com.study.library.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,13 @@ public class AuthorController {
         return ResponseEntity.ok().build();
     }
 
+
+    @GetMapping("/{id}")
+    public AuthorEntity getAuthor(@PathVariable Integer id) {
+        return authorRepository.findById(id).orElseThrow(() -> new NotFoundException("Can not find author with id " + id));
+    }
+
+
     @GetMapping
     public ResponseEntity list() {
         Iterable<AuthorEntity> all = this.authorRepository.findAll();
@@ -47,7 +55,7 @@ public class AuthorController {
     public void delete(@RequestParam Integer id) {
         AuthorEntity authorEntity = authorRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid author id:" + id));
+                .orElseThrow(() -> new NotFoundException("Can not find author with id " + id));
         authorRepository.delete(authorEntity);
     }
 
