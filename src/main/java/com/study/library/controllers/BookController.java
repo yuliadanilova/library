@@ -2,7 +2,6 @@ package com.study.library.controllers;
 
 import com.study.library.dto.AuthorDto;
 import com.study.library.dto.BookFilterDto;
-import com.study.library.entities.AuthorEntity;
 import com.study.library.exceptions.NotFoundException;
 import com.study.library.converters.Converter;
 import com.study.library.dto.BookDto;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.study.library.repositories.FilterSpecifications.byFilter;
