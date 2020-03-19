@@ -1,13 +1,9 @@
 package com.study.library.dto;
 
-import java.util.List;
-
 public class AuthorDto {
     private Integer id;
     private String name;
     private String description;
-    private List<BookDto> books;
-
 
     public Integer getId() {
         return id;
@@ -31,14 +27,6 @@ public class AuthorDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<BookDto> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookDto> books) {
-        this.books = books;
     }
 
 }

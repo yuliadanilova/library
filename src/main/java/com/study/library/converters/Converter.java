@@ -23,17 +23,6 @@ public class Converter {
         return bookEntity;
     }
 
-    private List<AuthorEntity> convertToAuthorEntities(List<AuthorDto> authors) {
-       return authors
-               .stream()
-               .map(a -> {
-                   AuthorEntity author = new AuthorEntity();
-                   author.setId(a.getId());
-                   return convertAuthorDtoToAuthorEntity(author, a);
-               })
-               .collect(Collectors.toList());
-    }
-
     public AuthorEntity convertAuthorDtoToAuthorEntity(AuthorEntity authorEntity, AuthorDto authorDto) {
         authorEntity.setName(authorDto.getName());
         authorEntity.setDescription(authorDto.getDescription());
@@ -69,6 +58,14 @@ public class Converter {
         return bookDto;
     }
 
+    public AuthorDto convertAuthorEntityToAuthorDto(AuthorEntity a) {
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(a.getId());
+        authorDto.setName(a.getName());
+        authorDto.setDescription(a.getDescription());
+        return authorDto;
+    }
+
     private List<AuthorDto> convertToAuthorDtos(List<AuthorEntity> authors) {
         return authors
                 .stream()
@@ -76,12 +73,15 @@ public class Converter {
                 .collect(Collectors.toList());
     }
 
-    private AuthorDto convertAuthorEntityToAuthorDto(AuthorEntity a) {
-        AuthorDto authorDto = new AuthorDto();
-        authorDto.setId(a.getId());
-        authorDto.setName(a.getName());
-        authorDto.setDescription(a.getDescription());
-        return authorDto;
+    private List<AuthorEntity> convertToAuthorEntities(List<AuthorDto> authors) {
+        return authors
+                .stream()
+                .map(a -> {
+                    AuthorEntity author = new AuthorEntity();
+                    author.setId(a.getId());
+                    return convertAuthorDtoToAuthorEntity(author, a);
+                })
+                .collect(Collectors.toList());
     }
 
 }

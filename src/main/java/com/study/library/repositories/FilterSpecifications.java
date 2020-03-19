@@ -15,7 +15,7 @@ public class FilterSpecifications {
             List<Predicate> predicates = new ArrayList<>();
 
             if (!StringUtils.isEmpty(bookFilterDto.getName())) {
-                predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(root.get("name")), bookFilterDto.getName()));
+                predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(root.get("name")), bookFilterDto.getName().toUpperCase()));
             }
 
             if (bookFilterDto.getCount() != null) {

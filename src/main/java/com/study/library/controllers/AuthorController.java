@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController()
 @RequestMapping("/authors")
 public class AuthorController {
@@ -36,8 +39,12 @@ public class AuthorController {
 
     @GetMapping
     public ResponseEntity list() {
-        Iterable<AuthorEntity> all = this.authorRepository.findAll();
-        return ResponseEntity.ok(all);
+        List<AuthorDto> authorDtos = authorRepository
+                .findAll()
+                .stream()
+                .map(converter::convertAuthorEntityToAuthorDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(authorDtos);
     }
 
     @PutMapping
