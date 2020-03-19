@@ -1,0 +1,187 @@
+POST http://localhost:8080/authors
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "name": "Joan Rowling",
+  "description": "J.R."
+}
+
+###
+
+POST http://localhost:8080/authors
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "name": "Steven King",
+  "description": "S.K."
+}
+
+###
+
+GET http://localhost:8080/authors
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T115014.200.json
+<> 2020-03-19T113125.200.json
+<> 2020-03-19T112743.200.json
+<> 2020-03-19T112313.200.json
+<> 2020-03-19T111957.200.json
+<> 2020-03-19T111556.200.json
+<> 2020-03-19T110427.200.json
+
+###
+
+POST http://localhost:8080/books
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "name" : "Harry Potter",
+  "count" : 5,
+  "year" : 1993,
+  "authors": [
+    {
+      "id": 1,
+      "name": "Joan Rowling",
+      "description": "J.R."
+    }
+  ]
+}
+
+###
+
+POST http://localhost:8080/books
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "name" : "It",
+  "count" : 2,
+  "year" : 2010,
+  "authors": [
+    {
+      "id": 2,
+      "name": "Steven King",
+      "description": "S.K."
+    }
+  ]
+}
+
+###
+
+GET http://localhost:8080/books
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T115022.200.json
+<> 2020-03-19T114426.200.json
+<> 2020-03-19T114239.200.json
+<> 2020-03-19T114130.200.json
+<> 2020-03-19T113145.200.json
+<> 2020-03-19T112830.500.json
+<> 2020-03-19T112013.500.json
+<> 2020-03-19T111607.500.json
+<> 2020-03-19T110456.200.json
+
+###
+
+GET http://localhost:8080/books?count=2&year=2010&name=It
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T115037.200.json
+<> 2020-03-19T115027.200.json
+<> 2020-03-19T114749.200.json
+<> 2020-03-19T114740.200.json
+<> 2020-03-19T114733.200.json
+<> 2020-03-19T114703.200.json
+<> 2020-03-19T114656.200.json
+<> 2020-03-19T114617.200.json
+
+###
+
+
+
+GET http://localhost:8080/authors
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T113204.200.json
+<> 2020-03-19T112013.500.json
+<> 2020-03-19T111607.500.json
+<> 2020-03-19T110456.200.json
+
+###
+
+POST http://localhost:8080/clients
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 32,
+  "passport": 2304
+}
+
+<> 2020-03-19T113817.200.json
+
+###
+
+POST http://localhost:8080/clients
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "firstName": "Alex",
+  "lastName": "Alexxx",
+  "age": 12,
+  "passport": 4404
+}
+
+<> 2020-03-19T113825.200.json
+
+###
+
+GET http://localhost:8080/clients/4404
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T113916.200.json
+<> 2020-03-19T113849.405.json
+
+###
+
+POST http://localhost:8080/rents/3/6
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T114113.500.json
+<> 2020-03-19T114058.500.json
+<> 2020-03-19T114051.500.json
+<> 2020-03-19T114042.404.json
+
+###
+
+DELETE http://localhost:8080/rents/3/6
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-03-19T114404.404.json
+<> 2020-03-19T114332.404.json
+<> 2020-03-19T114113.500.json
+<> 2020-03-19T114058.500.json
+<> 2020-03-19T114051.500.json
+<> 2020-03-19T114042.404.json
+
+###
+
+
+
