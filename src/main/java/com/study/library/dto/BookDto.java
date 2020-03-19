@@ -6,6 +6,7 @@ public class BookDto {
     private Integer id;
     private String name;
     private Integer count;
+    private Integer year;
     private List<AuthorDto> authors;
 
     public List<AuthorDto> getAuthors() {
@@ -39,6 +40,15 @@ public class BookDto {
     public void setCount(Integer count) {
         this.count = count;
     }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
 
 
 }

@@ -18,8 +18,12 @@ public class FilterSpecifications {
                 predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(root.get("name")), bookFilterDto.getName()));
             }
 
-            if (bookFilterDto.getCount() != null ) {
+            if (bookFilterDto.getCount() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("count"), bookFilterDto.getCount()));
+            }
+
+            if (bookFilterDto.getYear() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("year"), bookFilterDto.getYear()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[] {}));

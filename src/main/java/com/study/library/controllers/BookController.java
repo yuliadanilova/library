@@ -36,10 +36,6 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity add(@RequestBody BookDto bookDto) {
-        List<AuthorDto> authors = bookDto.getAuthors();
-        if (authors != null && authors.size() > 0)   {
-            authors.forEach(a -> {});
-        }
         this.bookRepository.save(converter.convertBookDtoToBookEntity(new BookEntity(), bookDto));
         return ResponseEntity.ok().build();
     }
@@ -49,11 +45,14 @@ public class BookController {
         return bookRepository.findById(id).orElseThrow(() -> new NotFoundException("Can not find book with id: " + id));
     }
 
-    @GetMapping("/searchByFilter")
-    public ResponseEntity search(@RequestBody BookFilterDto bookFilterDto) {
-      List<BookDto> books = new ArrayList<>();
-      bookRepository.findAll(byFilter(bookFilterDto)).forEach(book -> books.add(converter.convertBookEntityToBookDto(book)));
-      return ResponseEntity.ok(books);
+    @GetMapping
+    public ResponseEntity search(BookFilterDto bookFilterDto) {
+        List<BookDto> books = bookRepository
+                .findAll(byFilter(bookFilterDto))
+                .stream()
+                .map(converter::convertBookEntityToBookDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(books);
     }
 
     @GetMapping("/available")
@@ -62,12 +61,6 @@ public class BookController {
         Iterable<BookEntity> all = bookRepository.findAll();
         all.forEach(bookEntityList:: add);
         return bookEntityList.stream().filter(b -> b.getCount() > 0).collect(Collectors.toList());
-    }
-
-    @GetMapping
-    public ResponseEntity getAllBooks() {
-        Iterable<BookEntity> all = bookRepository.findAll();
-        return ResponseEntity.ok(all);
     }
 
     @PutMapping

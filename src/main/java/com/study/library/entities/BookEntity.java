@@ -12,6 +12,8 @@ public class BookEntity {
     private String name;
     @Column
     private Integer count;
+    @Column
+    private Integer year;
     @ManyToMany()
     private List<AuthorEntity> authors;
 
@@ -46,4 +48,14 @@ public class BookEntity {
     public void setCount(Integer count) {
         this.count = count;
     }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+
 }

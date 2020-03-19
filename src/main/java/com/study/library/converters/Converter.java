@@ -18,6 +18,7 @@ public class Converter {
     public BookEntity convertBookDtoToBookEntity(BookEntity bookEntity, BookDto bookDto) {
         bookEntity.setName(bookDto.getName());
         bookEntity.setCount(bookDto.getCount());
+        bookEntity.setYear(bookDto.getYear());
         bookEntity.setAuthors(convertToAuthorEntities(bookDto.getAuthors()));
         return bookEntity;
     }
@@ -63,6 +64,7 @@ public class Converter {
         bookDto.setId(book.getId());
         bookDto.setName(book.getName());
         bookDto.setCount(book.getCount());
+        bookDto.setYear(book.getYear());
         bookDto.setAuthors(convertToAuthorDtos(book.getAuthors()));
         return bookDto;
     }
