@@ -4,8 +4,8 @@ public class ClientDto {
     private Integer id;
     private String firstName;
     private String lastName;
-    private Integer passport;
-    private Integer age;
+    private Long passport;
+    private Long age;
 
     public Integer getId() {
         return id;
@@ -31,19 +31,19 @@ public class ClientDto {
         this.lastName = lastName;
     }
 
-    public Integer getPassport() {
+    public Long getPassport() {
         return passport;
     }
 
-    public void setPassport(Integer passport) {
+    public void setPassport(Long passport) {
         this.passport = passport;
     }
 
-    public Integer getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 }

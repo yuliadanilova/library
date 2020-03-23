@@ -16,9 +16,9 @@ public class ClientEntity {
     @Column
     private String lastName;
     @Column
-    private Integer passport;
+    private Long passport;
     @Column
-    private Integer age;
+    private Long age;
 
     public Integer getId() {
         return id;
@@ -28,19 +28,19 @@ public class ClientEntity {
         this.id = id;
     }
 
-    public Integer getPassport() {
+    public Long getPassport() {
         return passport;
     }
 
-    public void setPassport(Integer passport) {
+    public void setPassport(Long passport) {
         this.passport = passport;
     }
 
-    public Integer getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
