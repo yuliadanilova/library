@@ -16,6 +16,8 @@ public class BookEntity {
     private Integer year;
     @ManyToMany()
     private List<AuthorEntity> authors;
+    @OneToMany( mappedBy = "book" )
+    private List<RentEntity> rents;
 
     public Integer getId() {
         return id;
@@ -57,5 +59,11 @@ public class BookEntity {
         this.year = year;
     }
 
+    public List<RentEntity> getRents() {
+        return rents;
+    }
 
+    public void setRents(List<RentEntity> rents) {
+        this.rents = rents;
+    }
 }

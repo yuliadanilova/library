@@ -2,8 +2,8 @@ package com.study.library.dto;
 
 public class ReviewDto {
 
-    public Integer rating;
-    public String comment;
+    private Integer rating;
+    private String comment;
 
     public Integer getRating() {
         return rating;

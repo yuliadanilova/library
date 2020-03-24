@@ -8,6 +8,7 @@ public class BookDto {
     private Integer count;
     private Integer year;
     private List<AuthorDto> authors;
+    private List<RentDto> rents;
 
     public List<AuthorDto> getAuthors() {
         return authors;
@@ -50,5 +51,12 @@ public class BookDto {
     }
 
 
+    public List<RentDto> getRents() {
+        return rents;
+    }
+
+    public void setRents(List<RentDto> rents) {
+        this.rents = rents;
+    }
 
 }

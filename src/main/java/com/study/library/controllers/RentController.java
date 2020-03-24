@@ -3,6 +3,7 @@ package com.study.library.controllers;
 
 import com.study.library.dto.ReviewDto;
 import com.study.library.entities.BookEntity;
+import com.study.library.entities.ClientEntity;
 import com.study.library.entities.RentEntity;
 import com.study.library.exceptions.NotFoundException;
 import com.study.library.repositories.BookRepository;
@@ -35,15 +36,15 @@ public class RentController {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundException("Can not find book with id: " + bookId));
         Integer count = bookEntity.getCount();
         if (count > 0) {
-            clientRepository.findById(clientId).orElseThrow(() -> new NotFoundException("Can not find client with id: " + clientId));
+            ClientEntity clientEntity = clientRepository.findById(clientId).orElseThrow(() -> new NotFoundException("Can not find client with id: " + clientId));
             Optional<RentEntity> byBookIdAndClientId = rentRepository.findByBookIdAndClientId(bookId, clientId);
             if (!byBookIdAndClientId.isPresent()) {
                 RentEntity rentEntity = new RentEntity();
-                rentEntity.setBookId(bookId);
-                rentEntity.setClientId(clientId);
+                rentEntity.setBook(bookEntity);
+                rentEntity.setClient(clientEntity);
                 LocalDate date = LocalDate.now();
                 rentEntity.setStartDate(date);
-                rentEntity.setFinishDate(date.plusMonths(1));
+                rentEntity.setDeadlineDate(date.plusMonths(1));
                 rentRepository.save(rentEntity);
                 bookEntity.setCount(--count);
                 bookRepository.save(bookEntity);
@@ -56,10 +57,14 @@ public class RentController {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundException("Can not find book with id: " + bookId));
         Optional<RentEntity> byBookIdAndClientId = rentRepository.findByBookIdAndClientId(bookId, clientId);
         Integer count = bookEntity.getCount();
-        if (byBookIdAndClientId.isPresent()) {
-            rentRepository.delete(byBookIdAndClientId.get());
+        if (byBookIdAndClientId.isPresent() && byBookIdAndClientId.get().getFinishDate() == null) {
+            RentEntity rentEntity = byBookIdAndClientId.get();
+            rentEntity.setFinishDate(LocalDate.now());
+            rentRepository.save(rentEntity);
             bookEntity.setCount(++count);
             bookRepository.save(bookEntity);
+        } else {
+            throw new NotFoundException("Can not find information");
         }
     }
 

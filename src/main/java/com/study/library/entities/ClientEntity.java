@@ -1,9 +1,7 @@
 package com.study.library.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ClientEntity {
@@ -19,6 +17,8 @@ public class ClientEntity {
     private Long passport;
     @Column
     private Long age;
+    @OneToMany( mappedBy = "client" )
+    private List<RentEntity> rents;
 
     public Integer getId() {
         return id;
@@ -44,19 +44,27 @@ public class ClientEntity {
         this.age = age;
     }
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstName = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastName = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<RentEntity> getRents() {
+        return rents;
+    }
+
+    public void setRents(List<RentEntity> rents) {
+        this.rents = rents;
     }
 }

@@ -1,12 +1,10 @@
 package com.study.library.controllers;
 
-import com.study.library.dto.AuthorDto;
 import com.study.library.dto.BookFilterDto;
 import com.study.library.exceptions.NotFoundException;
 import com.study.library.converters.Converter;
 import com.study.library.dto.BookDto;
 import com.study.library.entities.BookEntity;
-import com.study.library.repositories.AuthorRepository;
 import com.study.library.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +22,11 @@ import static com.study.library.repositories.FilterSpecifications.byFilter;
 public class BookController {
 
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
     private final Converter converter;
 
     @Autowired
-    public BookController(BookRepository bookRepository, AuthorRepository authorRepository, Converter converter) {
+    public BookController(BookRepository bookRepository, Converter converter) {
         this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
         this.converter = converter;
     }
 
@@ -42,8 +38,9 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public BookEntity bookEntity(@PathVariable Integer id) {
-        return bookRepository.findById(id).orElseThrow(() -> new NotFoundException("Can not find book with id: " + id));
+    public ResponseEntity bookEntity(@PathVariable Integer id) {
+        BookEntity bookEntity = bookRepository.findById(id).orElseThrow(() -> new NotFoundException("Can not find book with id: " + id));
+        return ResponseEntity.ok(converter.convertBookEntityToBookDto(bookEntity));
     }
 
     @GetMapping
@@ -54,14 +51,6 @@ public class BookController {
                 .map(converter::convertBookEntityToBookDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(books);
-    }
-
-    @GetMapping("/available")
-    public List<BookEntity> getAllAvailableBooks() {
-        List<BookEntity> bookEntityList = new ArrayList<>();
-        Iterable<BookEntity> all = bookRepository.findAll();
-        all.forEach(bookEntityList:: add);
-        return bookEntityList.stream().filter(b -> b.getCount() > 0).collect(Collectors.toList());
     }
 
     @PutMapping

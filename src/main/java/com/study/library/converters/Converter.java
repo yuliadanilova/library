@@ -3,11 +3,14 @@ package com.study.library.converters;
 import com.study.library.dto.AuthorDto;
 import com.study.library.dto.BookDto;
 import com.study.library.dto.ClientDto;
+import com.study.library.dto.RentDto;
 import com.study.library.entities.AuthorEntity;
 import com.study.library.entities.BookEntity;
 import com.study.library.entities.ClientEntity;
+import com.study.library.entities.RentEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +37,8 @@ public class Converter {
         clientEntity.setId(client.getId());
         clientEntity.setPassport(client.getPassport());
         clientEntity.setAge(client.getAge());
-        clientEntity.setFirstname(client.getFirstName());
-        clientEntity.setLastname(client.getLastName());
+        clientEntity.setFirstName(client.getFirstName());
+        clientEntity.setLastName(client.getLastName());
         return clientEntity;
     }
 
@@ -44,8 +47,8 @@ public class Converter {
         clientDto.setId(clientEntity.getId());
         clientDto.setAge(clientEntity.getAge());
         clientDto.setPassport(clientEntity.getPassport());
-        clientDto.setFirstName(clientEntity.getFirstname());
-        clientDto.setLastName(clientEntity.getLastname());
+        clientDto.setFirstName(clientEntity.getFirstName());
+        clientDto.setLastName(clientEntity.getLastName());
         return clientDto;
     }
 
@@ -56,6 +59,7 @@ public class Converter {
         bookDto.setCount(book.getCount());
         bookDto.setYear(book.getYear());
         bookDto.setAuthors(convertToAuthorDtos(book.getAuthors()));
+        bookDto.setRents(convertRentsToRentsDto(book.getRents()));
         return bookDto;
     }
 
@@ -65,6 +69,28 @@ public class Converter {
         authorDto.setName(a.getName());
         authorDto.setDescription(a.getDescription());
         return authorDto;
+    }
+
+    private List<RentDto> convertRentsToRentsDto(List<RentEntity> rentEntities) {
+        if (rentEntities == null) {
+            return new ArrayList<>();
+        }
+        return rentEntities
+                .stream()
+                .map(this::convertRentEntityToRentDto)
+                .collect(Collectors.toList());
+    }
+
+    private RentDto convertRentEntityToRentDto(RentEntity rent) {
+        RentDto rentDto = new RentDto();
+        rentDto.setId(rent.getId());
+        rentDto.setClientDto(convertClientEntityToClientDto(rent.getClient()));
+        rentDto.setStartDate(rent.getStartDate());
+        rentDto.setFinishDate(rent.getFinishDate());
+        rentDto.setDeadlineDate(rent.getDeadlineDate());
+        rentDto.setComment(rent.getComment());
+        rentDto.setRating(rent.getRating());
+        return rentDto;
     }
 
     private List<AuthorDto> convertToAuthorDtos(List<AuthorEntity> authors) {
