@@ -31,6 +31,7 @@ public class Converter {
 
     public ClientEntity convertClientDtoToClientEntity(ClientDto client) {
         ClientEntity clientEntity = new ClientEntity();
+        clientEntity.setId(client.getId());
         clientEntity.setPassport(client.getPassport());
         clientEntity.setAge(client.getAge());
         clientEntity.setFirstname(client.getFirstName());

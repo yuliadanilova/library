@@ -2,6 +2,7 @@ package com.study.library.controllers;
 
 import com.study.library.converters.Converter;
 import com.study.library.dto.ClientDto;
+import com.study.library.entities.AuthorEntity;
 import com.study.library.entities.ClientEntity;
 import com.study.library.exceptions.NotFoundException;
 import com.study.library.repositories.ClientRepository;
@@ -52,7 +53,25 @@ public class ClientController {
             throw new IllegalArgumentException("This client already exists");
         }
         ClientEntity save = clientRepository.save(converter.convertClientDtoToClientEntity(client));
-        return ResponseEntity.ok(save);
+        return ResponseEntity.ok(converter.convertClientEntityToClientDto(save));
+    }
+
+    @DeleteMapping
+    public void delete(@RequestParam Integer id){
+        ClientEntity clientEntity = clientRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Can not find client with id: " + id));
+        clientRepository.delete(clientEntity);
+    }
+
+    @PutMapping
+    public ClientEntity update(@RequestBody ClientDto client){
+        return clientRepository.findById(client.getId())
+                .map(authorEntity -> clientRepository.save(converter.convertClientDtoToClientEntity(client)))
+                .orElseGet(() -> {
+                    ClientEntity newClient = new ClientEntity();
+                    newClient.setId(client.getId());
+                    return clientRepository.save(converter.convertClientDtoToClientEntity(client));
+                });
     }
 
 }

@@ -26,8 +26,9 @@ public class AuthorController {
 
     @PostMapping
     public ResponseEntity add(@RequestBody AuthorDto authorDto) {
-        this.authorRepository.save(converter.convertAuthorDtoToAuthorEntity(new AuthorEntity(), authorDto));
-        return ResponseEntity.ok().build();
+        AuthorEntity authorEntity = converter.convertAuthorDtoToAuthorEntity(new AuthorEntity(), authorDto);
+        this.authorRepository.save(authorEntity);
+        return ResponseEntity.ok(converter.convertAuthorEntityToAuthorDto(authorEntity));
     }
 
 

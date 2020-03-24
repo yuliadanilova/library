@@ -36,8 +36,9 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity add(@RequestBody BookDto bookDto) {
-        this.bookRepository.save(converter.convertBookDtoToBookEntity(new BookEntity(), bookDto));
-        return ResponseEntity.ok().build();
+        BookEntity bookEntity = converter.convertBookDtoToBookEntity(new BookEntity(), bookDto);
+        this.bookRepository.save(bookEntity);
+        return ResponseEntity.ok(converter.convertBookEntityToBookDto(bookEntity));
     }
 
     @GetMapping("/{id}")
