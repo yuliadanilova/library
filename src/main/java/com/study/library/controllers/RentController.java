@@ -73,7 +73,7 @@ public class RentController {
         return null;
     }
 
-    @DeleteMapping("/{bookId}/{clientId}")
+    @PutMapping("/{bookId}/{clientId}")
     public void returnBook(@PathVariable Integer bookId, @PathVariable Integer clientId, @RequestBody ReviewDto review) {
         BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundException("Can not find book with id: " + bookId));
         Optional<RentEntity> byBookIdAndClientId = rentRepository.findByBookIdAndClientId(bookId, clientId);
@@ -83,6 +83,7 @@ public class RentController {
             rentEntity.setFinishDate(LocalDate.now());
             rentEntity.getReview().setComment(review.getComment());
             rentEntity.getReview().setRating(review.getRating());
+            rentEntity.setState(RentStates.COMPLETED);
             rentRepository.save(rentEntity);
             bookEntity.setCount(++count);
             bookRepository.save(bookEntity);
@@ -91,7 +92,7 @@ public class RentController {
         }
     }
 
-    @PutMapping("/{bookId}/{clientId}")
+   /* @PutMapping("/{bookId}/{clientId}")
     public void reviewBook(@PathVariable Integer bookId, @PathVariable Integer clientId, @RequestBody ReviewDto review) {
         Optional<RentEntity> byBookIdAndClientId = rentRepository.findByBookIdAndClientId(bookId, clientId);
         if (byBookIdAndClientId.isPresent()) {
@@ -102,7 +103,7 @@ public class RentController {
         } else {
             throw new NotFoundException("Can not find rent information");
         }
-    }
+    }*/
 
 
 }

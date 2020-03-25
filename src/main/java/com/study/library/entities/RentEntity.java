@@ -21,7 +21,7 @@ public class RentEntity {
     private LocalDate finishDate;
     @ManyToOne
     private BookEntity book;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ReviewEntity review;
     @Column
     private RentStates state;

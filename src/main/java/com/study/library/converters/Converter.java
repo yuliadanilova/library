@@ -84,6 +84,7 @@ public class Converter {
         rentDto.setStartDate(rent.getStartDate());
         rentDto.setFinishDate(rent.getFinishDate());
         rentDto.setDeadlineDate(rent.getDeadlineDate());
+        rentDto.setStates(rent.getState());
         rentDto.setBook(convertBookEntityToBookDto(rent.getBook()));
         if (rent.getReview() != null)
             rentDto.setReview(new ReviewDto(rent.getReview().getId(),
