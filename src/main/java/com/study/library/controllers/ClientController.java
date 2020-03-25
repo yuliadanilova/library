@@ -38,7 +38,7 @@ public class ClientController {
     }
 
     @GetMapping("/{passport}")
-    public ResponseEntity search(@PathVariable Long passport) {
+    public ResponseEntity search(@PathVariable Long passport) throws Throwable {
         Optional<ClientEntity> clientByPassportOptional = clientRepository.findByPassport(passport);
         ClientEntity clientEntity = clientByPassportOptional.orElseThrow(() -> {
             throw new NotFoundException("This client can not find");

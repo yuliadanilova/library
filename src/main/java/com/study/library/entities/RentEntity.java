@@ -1,5 +1,7 @@
 package com.study.library.entities;
 
+import com.study.library.enums.RentStates;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -19,10 +21,10 @@ public class RentEntity {
     private LocalDate finishDate;
     @ManyToOne
     private BookEntity book;
+    @OneToOne
+    private ReviewEntity review;
     @Column
-    private Integer rating;
-    @Column
-    private String comment;
+    private RentStates state;
 
     public BookEntity getBook() {
         return book;
@@ -72,19 +74,19 @@ public class RentEntity {
         this.finishDate = finishDate;
     }
 
-    public Integer getRating() {
-        return rating;
+    public ReviewEntity getReview() {
+        return review;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public void setReview(ReviewEntity review) {
+        this.review = review;
     }
 
-    public String getComment() {
-        return comment;
+    public RentStates getState() {
+        return state;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setState(RentStates state) {
+        this.state = state;
     }
 }

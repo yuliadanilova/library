@@ -1,9 +1,6 @@
 package com.study.library.converters;
 
-import com.study.library.dto.AuthorDto;
-import com.study.library.dto.BookDto;
-import com.study.library.dto.ClientDto;
-import com.study.library.dto.RentDto;
+import com.study.library.dto.*;
 import com.study.library.entities.AuthorEntity;
 import com.study.library.entities.BookEntity;
 import com.study.library.entities.ClientEntity;
@@ -59,7 +56,6 @@ public class Converter {
         bookDto.setCount(book.getCount());
         bookDto.setYear(book.getYear());
         bookDto.setAuthors(convertToAuthorDtos(book.getAuthors()));
-        bookDto.setRents(convertRentsToRentsDto(book.getRents()));
         return bookDto;
     }
 
@@ -81,15 +77,18 @@ public class Converter {
                 .collect(Collectors.toList());
     }
 
-    private RentDto convertRentEntityToRentDto(RentEntity rent) {
+    public RentDto convertRentEntityToRentDto(RentEntity rent) {
         RentDto rentDto = new RentDto();
         rentDto.setId(rent.getId());
-        rentDto.setClientDto(convertClientEntityToClientDto(rent.getClient()));
+        rentDto.setClient(convertClientEntityToClientDto(rent.getClient()));
         rentDto.setStartDate(rent.getStartDate());
         rentDto.setFinishDate(rent.getFinishDate());
         rentDto.setDeadlineDate(rent.getDeadlineDate());
-        rentDto.setComment(rent.getComment());
-        rentDto.setRating(rent.getRating());
+        rentDto.setBook(convertBookEntityToBookDto(rent.getBook()));
+        if (rent.getReview() != null)
+            rentDto.setReview(new ReviewDto(rent.getReview().getId(),
+                    rent.getReview().getRating(),
+                    rent.getReview().getComment()));
         return rentDto;
     }
 

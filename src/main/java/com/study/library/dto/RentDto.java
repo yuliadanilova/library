@@ -1,5 +1,7 @@
 package com.study.library.dto;
 
+import com.study.library.enums.RentStates;
+
 import java.time.LocalDate;
 
 public class RentDto {
@@ -8,18 +10,19 @@ public class RentDto {
     private LocalDate startDate;
     private LocalDate finishDate;
     private LocalDate deadlineDate;
-    private Integer rating;
-    private String comment;
+    private ReviewDto review;
+    private BookDto book;
+    private RentStates states;
+    private ClientDto client;
 
-    public ClientDto getClientDto() {
-        return clientDto;
+
+    public ClientDto getClient() {
+        return client;
     }
 
-    public void setClientDto(ClientDto clientDto) {
-        this.clientDto = clientDto;
+    public void setClient(ClientDto client) {
+        this.client = client;
     }
-
-    private ClientDto clientDto;
 
     public Integer getId() {
         return id;
@@ -53,19 +56,27 @@ public class RentDto {
         this.deadlineDate = deadlineDate;
     }
 
-    public Integer getRating() {
-        return rating;
+    public ReviewDto getReview() {
+        return review;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public void setReview(ReviewDto review) {
+        this.review = review;
     }
 
-    public String getComment() {
-        return comment;
+    public BookDto getBook() {
+        return book;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setBook(BookDto book) {
+        this.book = book;
+    }
+
+    public RentStates getStates() {
+        return states;
+    }
+
+    public void setStates(RentStates states) {
+        this.states = states;
     }
 }

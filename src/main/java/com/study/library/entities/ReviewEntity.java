@@ -1,15 +1,26 @@
-package com.study.library.dto;
+package com.study.library.entities;
 
-public class ReviewDto {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class ReviewEntity {
+
+    @Id
+    @GeneratedValue
     private Integer id;
+
+    @Column
     private Integer rating;
+    @Column
     private String comment;
 
-    public ReviewDto() {
+    public ReviewEntity() {
     }
 
-    public ReviewDto(Integer id, Integer rating, String comment) {
+    public ReviewEntity(Integer id, Integer rating, String comment) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
