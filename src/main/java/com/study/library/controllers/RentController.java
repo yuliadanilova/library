@@ -40,7 +40,7 @@ public class RentController {
     }
 
     @GetMapping
-    private ResponseEntity listRents(){
+    public ResponseEntity listRents(){
         List<RentDto> rentDtos = rentRepository
                 .findAll()
                 .stream()
